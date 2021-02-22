@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import { useState, useEffect } from 'react';
 
 const Endpoint = `https://rickandmortyapi.com/api/character/`;
 
@@ -14,9 +15,48 @@ export async function getServerSideProps() {
 }
 
 export default function Home({ data }) {
-  // destructuring from data object
-  const { results = [] } = data;
-  console.log(results);
+  // destructuring from data object and set states
+  const { info, results: defaultResults = [] } = data;
+  const [results, updateResults] = useState(defaultResults);
+  // spread operator alter!!
+  const [page, updatePage] = useState({
+    ...info,
+    ongoing: Endpoint
+  });
+  const { ongoing } = page;
+
+// Similar to componentDidMount and componentDidUpdate:
+useEffect(() => {
+  if ( ongoing === Endpoint ) return;
+
+  async function request() {
+    const res = await fetch(ongoing)
+    const nextData = await res.json();
+
+    updatePage({
+      ongoing,
+      ...nextData.info
+    }); 
+// concatenate new results to old
+    updateResults(prev => {
+      return [
+        ...prev,
+        ...nextData.results
+      ]
+    });
+  }
+
+  request();
+}, [ongoing]); 
+// only if this changes the hook will go
+function handleLoadMore() {
+  updatePage(prev => {
+    return {
+      ...prev,
+      ongoing: page?.next
+    }
+  });
+}
   return (
     <div className={styles.container}>
       <Head>
@@ -46,6 +86,7 @@ export default function Home({ data }) {
             )
           })}
         </ul>
+        <button onClick={handleLoadMore}>Load More</button>
       </main>
     </div>
   )
