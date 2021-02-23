@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react';
+import React from 'react';
+import { useForm } from "react-hook-form";
 
 const Endpoint = `https://rickandmortyapi.com/api/character/`;
 
@@ -24,39 +26,51 @@ export default function Home({ data }) {
     ongoing: Endpoint
   });
   const { ongoing } = page;
+  console.log(ongoing);
 
-// Similar to componentDidMount and componentDidUpdate:
-useEffect(() => {
-  if ( ongoing === Endpoint ) return;
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    if ( ongoing === Endpoint ) return;
 
-  async function request() {
-    const res = await fetch(ongoing)
-    const nextData = await res.json();
+    async function request() {
+      const res = await fetch(ongoing)
+      const newData = await res.json();
+      
+      updatePage({
+        ongoing,
+        ...newData.info
+      }); 
+      // console.log(newData.info.prev);
+  // concatenate new results to old
+      updateResults(prev => {
+        return [
+          ...prev,
+          ...newData.results
+        ]
+      });
+    }
 
-    updatePage({
-      ongoing,
-      ...nextData.info
-    }); 
-// concatenate new results to old
-    updateResults(prev => {
-      return [
+    request();
+  }, [ongoing]); 
+  // only if this changes the hook will go
+
+  function handleLoadMore() {
+    updatePage(prev => {
+      return {
         ...prev,
-        ...nextData.results
-      ]
+        ongoing: page.next
+      }
     });
   }
+  const {register, handleSubmit} = useForm();
 
-  request();
-}, [ongoing]); 
-// only if this changes the hook will go
-function handleLoadMore() {
-  updatePage(prev => {
-    return {
-      ...prev,
-      ongoing: page?.next
-    }
-  });
-}
+  const handleSearch = event => {
+    event.preventDefault();
+    console.log(event); // don't redirect the page
+    // where we'll add our form logic
+  }
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -72,6 +86,11 @@ function handleLoadMore() {
         <p className={styles.description}>
           Sometimes Science Is More Art Than Science, Morty
         </p>
+        
+        <form className={styles.searchForm} onSubmit={handleSubmit(handleSearch)}>
+          <input ref={register} name="query" type="text" placeholder="Find characters" />
+          <button>Search</button>
+        </form>
 
         <ul className={styles.grid}>
           {results.map(result => {

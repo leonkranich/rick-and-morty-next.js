@@ -122,6 +122,10 @@
   border-radius: 50%
 }
 
+.searchForm input {
+  margin: 5px;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
