@@ -40,7 +40,13 @@ export default function Home({ data }) {
         ongoing,
         ...newData.info
       }); 
+
       // console.log(newData.info.prev);
+      // prevent same keys
+      if ( !newData.info.prev ) {
+        updateResults(newData.results);
+        return;
+      }
   // concatenate new results to old
       updateResults(prev => {
         return [
@@ -65,9 +71,12 @@ export default function Home({ data }) {
   const {register, handleSubmit} = useForm();
 
   const handleSearch = event => {
-    event.preventDefault();
-    console.log(event); // don't redirect the page
-    // where we'll add our form logic
+    const query = event.input;
+    const endpoint = `https://rickandmortyapi.com/api/character/?name=${query}`;
+
+    updatePage({
+      ongoing: endpoint
+    })
   }
 
 
@@ -87,9 +96,9 @@ export default function Home({ data }) {
           Sometimes Science Is More Art Than Science, Morty
         </p>
         
-        <form className={styles.searchForm} onSubmit={handleSubmit(handleSearch)}>
-          <input ref={register} name="query" type="text" placeholder="Find characters" />
-          <button>Search</button>
+        <form className={styles.searchForm} onChange={handleSubmit(handleSearch)}>
+          <input ref={register} name="input" type="text" placeholder="Find characters" />
+          {/* <button>Search</button> */}
         </form>
 
         <ul className={styles.grid}>
