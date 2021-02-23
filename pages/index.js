@@ -27,7 +27,6 @@ export default function Home({ data }) {
     ongoing: Endpoint
   });
   const { ongoing } = page;
-  console.log(ongoing);
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {

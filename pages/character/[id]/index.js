@@ -15,10 +15,26 @@ export async function getServerSideProps({ query }) {
   }
 }
 
+
 export default function Character({ data }) {
   const { name, image, gender, location, origin, species, status, episode } = data;
+  console.log(data);
 
-  console.log(episode);
+    let idArray = [];
+    episode.map(ep => {
+      const splitted = ep.split('/');
+      const lastElements = splitted[splitted.length -1];
+      idArray.push(lastElements);
+    });
+    const ids = idArray.join(',');
+
+    async function request() {
+      const res = await fetch(`https://rickandmortyapi.com/api/episode/${ids}`)
+      const newData = await res.json();
+      console.log(newData[0].id);
+    }
+    request();
+  
   return (
     <div className={styles.container}>
       <Head>
