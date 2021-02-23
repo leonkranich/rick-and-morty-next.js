@@ -122,8 +122,21 @@
   border-radius: 50%
 }
 
-.searchForm input {
+.search_form input {
   margin: 5px;
+}
+
+.character_details {
+  display: flex;
+  margin-top: 2em;
+}
+
+.character_details h3 {
+  font-size: 2.5rem;
+}
+
+.character_image {
+  margin-right: 12px;
 }
 
 @media (max-width: 600px) {

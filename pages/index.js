@@ -96,7 +96,7 @@ export default function Home({ data }) {
           Sometimes Science Is More Art Than Science, Morty
         </p>
         
-        <form className={styles.searchForm} onChange={handleSubmit(handleSearch)}>
+        <form className={styles.search_form} onChange={handleSubmit(handleSearch)}>
           <input ref={register} name="input" type="text" placeholder="Find characters" />
           {/* <button>Search</button> */}
         </form>
