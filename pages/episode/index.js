@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 import { useState, useEffect } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
 import Link from 'next/link'
 
-const Endpoint = `https://rickandmortyapi.com/api/character/`;
+const Endpoint = `https://rickandmortyapi.com/api/episode/`;
 
 export async function getServerSideProps() {
   const res = await fetch(Endpoint)
@@ -17,7 +17,7 @@ export async function getServerSideProps() {
   }
 }
 
-export default function Home({ data }) {
+export default function Episode({ data }) {
   // destructuring from data object and set states
   const { info, results: defaultResults = [] } = data;
   const [results, updateResults] = useState(defaultResults);
@@ -73,7 +73,7 @@ export default function Home({ data }) {
 
   const handleSearch = event => {
     const query = event.input;
-    const endpoint = `https://rickandmortyapi.com/api/character/?name=${query}`;
+    const endpoint = `https://rickandmortyapi.com/api/episode/?name=${query}`;
 
     updatePage({
       ongoing: endpoint
@@ -90,7 +90,7 @@ export default function Home({ data }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-           All Characters
+           All Episodes
         </h1>
 
         <p className={styles.description}>
@@ -98,19 +98,19 @@ export default function Home({ data }) {
         </p>
         
         <form className={styles.search_form} onChange={handleSubmit(handleSearch)}>
-          <input ref={register} name="input" type="text" placeholder="Find characters" />
+          <input ref={register} name="input" type="text" placeholder="Find episode" />
           {/* <button>Search</button> */}
         </form>
 
         <ul className={styles.grid}>
           {results.map(result => {
-            const { id, name, image } = result;
+            const { id, name, episode } = result;
             return (
               <li key={id} className={styles.card}>
-                <Link href="/character/[id]" as={`/character/${id}`}>
+                <Link href="/episode/[id]" as={`/episode/${id}`}>
                   <a>
-                    <img src={image} alt={`${name}`} className={styles.avatar} />
                     <h2>{ name }</h2>
+                    <p>{ episode }</p>
                   </a>
                 </Link>
               </li>

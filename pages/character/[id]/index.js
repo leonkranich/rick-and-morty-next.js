@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../../../styles/Home.module.css'
+import Link from 'next/link';
 
 const Endpoint = `https://rickandmortyapi.com/api/character/`;
 
@@ -16,7 +17,8 @@ export async function getServerSideProps({ query }) {
 
 export default function Character({ data }) {
   const { name, image, gender, location, origin, species, status, episode } = data;
-  console.log(data);
+
+  console.log({ episode });
   return (
     <div className={styles.container}>
       <Head>
@@ -50,6 +52,13 @@ export default function Character({ data }) {
             </ul>
            </div>
         </div>  
+        <button>
+          <Link href="/">
+            <a>
+              All Characters
+            </a>
+          </Link>
+        </button>
       </main>
     </div>
   )
