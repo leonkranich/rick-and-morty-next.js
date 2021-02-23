@@ -73,10 +73,10 @@ export default function Episode({ data }) {
 
   const handleSearch = event => {
     const query = event.input;
-    const endpoint = `https://rickandmortyapi.com/api/episode/?name=${query}`;
+    const endpointSearch = `https://rickandmortyapi.com/api/episode/?name=${query}`;
 
     updatePage({
-      ongoing: endpoint
+      ongoing: endpointSearch
     })
   }
 

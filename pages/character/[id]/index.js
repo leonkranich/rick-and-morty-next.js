@@ -18,7 +18,7 @@ export async function getServerSideProps({ query }) {
 export default function Character({ data }) {
   const { name, image, gender, location, origin, species, status, episode } = data;
 
-  console.log({ episode });
+  console.log(episode);
   return (
     <div className={styles.container}>
       <Head>
@@ -48,6 +48,9 @@ export default function Character({ data }) {
               </li>
               <li>
                 <strong>Origin:</strong> { origin.name }
+              </li>
+              <li>
+                <strong>episode:</strong> { episode }
               </li>
             </ul>
            </div>
