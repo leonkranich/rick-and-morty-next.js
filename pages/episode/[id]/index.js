@@ -39,7 +39,7 @@ export default function EpisodeShow({ data }) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Sometimes Science Is More Art Than Science, Morty</title>
+        <title>Explore Rick and Morty</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
