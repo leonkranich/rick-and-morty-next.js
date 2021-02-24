@@ -29,7 +29,7 @@ export default function Home({ data }) {
     ongoing: Endpoint
   });
   const [favId, setFavId] = useState();
-
+  
   localforage.getItem('fav', function(err, value) {
     // Run this code once the value has been
     // loaded from the offline store.
