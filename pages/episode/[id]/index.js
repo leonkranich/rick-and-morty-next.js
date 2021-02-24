@@ -2,6 +2,8 @@ import Head from 'next/head'
 import styles from '../../../styles/Home.module.css'
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import localforage from "localforage";
+
 
 const Endpoint = `https://rickandmortyapi.com/api/episode/`;
 
@@ -19,6 +21,15 @@ export async function getServerSideProps({ query }) {
 export default function EpisodeShow({ data }) {
   const { name, air_date, episode, characters } = data;
   const [charactersAll, setCharacters] = useState([]);
+  const [favId, setFavId] = useState();
+
+  localforage.getItem('fav', function(err, value) {
+    // Run this code once the value has been
+    // loaded from the offline store.
+    setFavId(value);
+    return;
+  });
+  
   
   useEffect(() => {
     let idArray = [];
@@ -41,6 +52,7 @@ export default function EpisodeShow({ data }) {
       <Head>
         <title>Explore Rick and Morty</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"></link>
       </Head>
 
       <main className={styles.main}>
@@ -59,13 +71,18 @@ export default function EpisodeShow({ data }) {
         <div>
           {charactersAll.map(character => {
             const { id, name, image} = character
+            let favClass = ''
+            if ( id === favId) {
+              favClass = 'fa fa-heart';
+               console.log(favClass, id);
+            }
               return (
                 <ul key={id}  className={styles.character_list}>
                   <li>
                     <Link href="/character/[id]" as={`/character/${id}`}>
                       <a>
                         <img src={image} alt={`${name}`} className={styles.avatar_small} />
-                        <p className={styles.character_list_details}> { name }</p>
+                        <p className={styles.character_list_details}> { name } <i className={favClass}></i></p>
                       </a>
                     </Link>
                   </li>

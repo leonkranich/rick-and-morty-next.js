@@ -35,7 +35,6 @@ export default function Home({ data }) {
     setFavId(value);
     return;
   });
-  console.log(favId);
   
   // Similar to componentDidMount and componentDidUpdate:
   const { ongoing } = page;
@@ -117,7 +116,7 @@ export default function Home({ data }) {
             const { id, name, image } = result;
             let favClass = ''
             if ( id === favId) {
-              favClass = 'fa fa-heart';
+              favClass = 'fa fa-heart'
               // console.log(favClass, id);
             }
             

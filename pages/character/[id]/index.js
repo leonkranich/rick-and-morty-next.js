@@ -22,7 +22,13 @@ export default function Character({ data }) {
   const { id, name, image, gender, location, origin, species, status, episode } = data;
   const [episodes, setEpisodes] = useState([]);
   const [favorite, setFavorite] = useState({});
-  console.log(favorite);
+
+  localforage.getItem('fav', function(err, value) {
+    // Run this code once the value has been
+    // loaded from the offline store.
+    setFavorite(value);
+    return;
+  });
 
   let icon = ''
   if (id === favorite ) {

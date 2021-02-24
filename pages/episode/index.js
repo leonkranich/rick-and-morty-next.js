@@ -3,7 +3,7 @@ import styles from '../../styles/Home.module.css'
 import { useState, useEffect } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-import Link from 'next/link'
+import Link from 'next/link';
 
 const Endpoint = `https://rickandmortyapi.com/api/episode/`;
 
@@ -21,14 +21,15 @@ export default function Episode({ data }) {
   // destructuring from data object and set states
   const { info, results: defaultResults = [] } = data;
   const [results, updateResults] = useState(defaultResults);
+
   // spread operator alter!!
   const [page, updatePage] = useState({
     ...info,
     ongoing: Endpoint
   });
-  const { ongoing } = page;
-  console.log(ongoing);
 
+
+  const { ongoing } = page;
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     if ( ongoing === Endpoint ) return;

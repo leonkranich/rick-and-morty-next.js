@@ -162,6 +162,10 @@
   list-style: none;
 }
 
+.character_list p:hover {
+  color: #05ffff;
+}
+
 .character_list_details {
   display: inline-block;
 }
