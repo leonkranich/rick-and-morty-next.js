@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import Link from 'next/link';
 import localforage from "localforage";
 
+
 const Endpoint = `https://rickandmortyapi.com/api/character/`;
 
 export async function getServerSideProps() {
@@ -99,7 +100,7 @@ export default function Home({ data }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-           All Characters
+           Rick & Morty Characters
         </h1>
 
         <p className={styles.description}>
