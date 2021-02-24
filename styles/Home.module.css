@@ -166,7 +166,7 @@
   display: inline-block;
 }
 
-.character_list p:hover{
+.character_details p:hover{
   color: #05ffff;
 }
 

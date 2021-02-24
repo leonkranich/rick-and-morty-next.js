@@ -3,7 +3,8 @@ import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react';
 import React from 'react';
 import { useForm } from "react-hook-form";
-import Link from 'next/link'
+import Link from 'next/link';
+import localforage from "localforage";
 
 const Endpoint = `https://rickandmortyapi.com/api/character/`;
 
@@ -26,9 +27,18 @@ export default function Home({ data }) {
     ...info,
     ongoing: Endpoint
   });
-  const { ongoing } = page;
+  const [favId, setFavId] = useState();
 
+  localforage.getItem('fav', function(err, value) {
+    // Run this code once the value has been
+    // loaded from the offline store.
+    setFavId(value);
+    return;
+  });
+  console.log(favId);
+  
   // Similar to componentDidMount and componentDidUpdate:
+  const { ongoing } = page;
   useEffect(() => {
     if ( ongoing === Endpoint ) return;
 
@@ -84,6 +94,7 @@ export default function Home({ data }) {
     <div className={styles.container}>
       <Head>
         <title>Explore Rick and Morty</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"></link>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -104,12 +115,18 @@ export default function Home({ data }) {
         <ul className={styles.grid}>
           {results.map(result => {
             const { id, name, image } = result;
+            let favClass = ''
+            if ( id === favId) {
+              favClass = 'fa fa-heart';
+              // console.log(favClass, id);
+            }
+            
             return (
               <li key={id} className={styles.card}>
                 <Link href="/character/[id]" as={`/character/${id}`}>
                   <a>
                     <img src={image} alt={`${name}`} className={styles.avatar} />
-                    <h2>{ name }</h2>
+                    <h2>{ name } <div className={styles.heart}><i className={favClass}></i></div></h2>
                   </a>
                 </Link>
               </li>

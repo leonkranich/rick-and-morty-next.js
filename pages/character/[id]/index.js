@@ -19,20 +19,24 @@ export async function getServerSideProps({ query }) {
 
 
 export default function Character({ data }) {
-  const { name, image, gender, location, origin, species, status, episode } = data;
+  const { id, name, image, gender, location, origin, species, status, episode } = data;
   const [episodes, setEpisodes] = useState([]);
-  const [favorite, setFavorite] = useState('');
+  const [favorite, setFavorite] = useState({});
   console.log(favorite);
 
+  let icon = ''
+  if (id === favorite ) {
+    icon = 'fa fa-heart'
+  }
 
   function handleSubmit() {
-    localforage.setItem('fav', 'fa fa-heart' , function(err, value) {
+    localforage.setItem('fav', data.id , function(err, value) {
       // Do other things once the value has been saved.
       setFavorite(value);
       return;
     });
-    };
-
+  };
+  
   useEffect(() => {
     let idArray = [];
     episode.map(ep => {
@@ -70,7 +74,7 @@ export default function Character({ data }) {
             <img src={image} alt={name} />
           </div>
           <div>
-          <h3> { name } <div className={styles.heart}><i className={favorite}></i></div> </h3>
+          <h3> { name } <div className={styles.heart}><i className={icon}></i></div> </h3>
           
             <ul>
               <li>
@@ -89,6 +93,11 @@ export default function Character({ data }) {
                 <strong>Origin:</strong> { origin.name }
               </li>
               <button className={styles.button_favorite} onClick={handleSubmit}>Mark as favorite &#10084;&#65039;</button>
+              <Link href="/">
+                <a>
+                  <p>Back to all characters</p>
+                </a>
+              </Link>
             </ul>
             
            </div>
