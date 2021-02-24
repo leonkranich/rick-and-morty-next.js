@@ -20,7 +20,6 @@ export async function getServerSideProps({ query }) {
 export default function Character({ data }) {
   const { name, image, gender, location, origin, species, status, episode } = data;
   const [episodes, setEpisodes] = useState([]);
-  
   useEffect(() => {
     let idArray = [];
     episode.map(ep => {
@@ -33,6 +32,12 @@ export default function Character({ data }) {
     async function request() {
       const res = await fetch(`https://rickandmortyapi.com/api/episode/${ids}`)
       const newData = await res.json();
+      
+      if (!Array.isArray(newData)) {
+        const singleItem = [newData]
+        setEpisodes(singleItem);
+        return;
+      }
       setEpisodes(newData);
     }
     request();
@@ -76,20 +81,20 @@ export default function Character({ data }) {
         </div> 
         <div className={styles.episode_list}>
           <h2>All Episodes </h2>
-             {episodes.map(episode => {
-              const { id, name} = episode
-                return (
-                  <ul key={id}>
-                    <li>
-                      <Link href="/episode/[id]" as={`/episode/${id}`}>
-                        <a>
-                          <p>Nr: { id } { name }</p>
-                        </a>
-                      </Link>
-                    </li>
-                  </ul>
-                )
-              })} 
+          {episodes.map(episode => {
+            const { id, name} = episode
+            return (
+              <ul key={id}>
+                <li>
+                  <Link href="/episode/[id]" as={`/episode/${id}`}>
+                    <a>
+                      <p>Nr: { id } { name }</p>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            )
+          })} 
         </div>
         <button>
           <Link href="/">
