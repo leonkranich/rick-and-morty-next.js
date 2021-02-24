@@ -122,6 +122,12 @@
   border-radius: 50%
 }
 
+.avatar_small {
+  width: 32px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
 .search_form input {
   margin: 5px;
 }
@@ -141,6 +147,27 @@
 
 .character_image {
   margin-right: 12px;
+}
+
+.episode_list ul {
+  list-style: none;
+}
+
+.episode_list p:hover {
+  color: #05ffff;
+}
+
+.character_list {
+  margin-top: 2em;
+  list-style: none;
+}
+
+.character_list_details {
+  display: inline-block;
+}
+
+.character_list p:hover{
+  color: #05ffff;
 }
 
 @media (max-width: 600px) {

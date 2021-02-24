@@ -69,24 +69,28 @@ export default function Character({ data }) {
                 <strong>Origin:</strong> { origin.name }
               </li>
               <li>
-                <strong>Episodes:</strong> {episodes.map(episode => {
-                  const { id, name} = episode
-                  return (
-                    <ul key={id}>
-                      <li>
-                        <Link href="/episode/[id]" as={`/episode/${id}`}>
-                          <a>
-                            <p>Nr: { id } { name }</p>
-                          </a>
-                        </Link>
-                      </li>
-                    </ul>
-                  )
-                })}
+                
               </li>
             </ul>
            </div>
-        </div>  
+        </div> 
+        <div className={styles.episode_list}>
+          <h2>All Episodes </h2>
+             {episodes.map(episode => {
+              const { id, name} = episode
+                return (
+                  <ul key={id}>
+                    <li>
+                      <Link href="/episode/[id]" as={`/episode/${id}`}>
+                        <a>
+                          <p>Nr: { id } { name }</p>
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
+                )
+              })} 
+        </div>
         <button>
           <Link href="/">
             <a>
