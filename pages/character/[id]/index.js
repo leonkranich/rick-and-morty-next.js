@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../../../styles/Home.module.css'
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 const Endpoint = `https://rickandmortyapi.com/api/character/`;
 
@@ -18,8 +19,9 @@ export async function getServerSideProps({ query }) {
 
 export default function Character({ data }) {
   const { name, image, gender, location, origin, species, status, episode } = data;
-  console.log(data);
-
+  const [episodes, setEpisodes] = useState([]);
+  
+  useEffect(() => {
     let idArray = [];
     episode.map(ep => {
       const splitted = ep.split('/');
@@ -27,13 +29,14 @@ export default function Character({ data }) {
       idArray.push(lastElements);
     });
     const ids = idArray.join(',');
-
+    
     async function request() {
       const res = await fetch(`https://rickandmortyapi.com/api/episode/${ids}`)
       const newData = await res.json();
-      console.log(newData[0].id);
+      setEpisodes(newData);
     }
     request();
+  }, [])
   
   return (
     <div className={styles.container}>
@@ -66,7 +69,20 @@ export default function Character({ data }) {
                 <strong>Origin:</strong> { origin.name }
               </li>
               <li>
-                <strong>episode:</strong> { episode }
+                <strong>Episodes:</strong> {episodes.map(episode => {
+                  const { id, name} = episode
+                  return (
+                    <ul key={id}>
+                      <li>
+                        <Link href="/episode/[id]" as={`/episode/${id}`}>
+                          <a>
+                            <p>Nr: { id } { name }</p>
+                          </a>
+                        </Link>
+                      </li>
+                    </ul>
+                  )
+                })}
               </li>
             </ul>
            </div>

@@ -17,6 +17,7 @@ export async function getServerSideProps({ query }) {
 
 export default function EpisodeShow({ data }) {
   const { name, air_date, episode, characters } = data;
+  console.log(data);
   return (
     <div className={styles.container}>
       <Head>

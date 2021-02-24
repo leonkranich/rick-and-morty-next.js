@@ -1491,6 +1491,11 @@ regenerator-runtime@^0.13.4:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
   integrity sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
 
+rickmortyapi@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/rickmortyapi/-/rickmortyapi-0.3.0.tgz#4a36d91b494a20f17680a57138bba62dd5280457"
+  integrity sha512-e+r8qxl3ri/SaY+PMTVS5/AG6hjgFENN8GW/R9yuEXF3jfjXRqsu8oHBaPSJ4KziEp+vbalA9WCvua0T4AE7eg==
+
 ripemd160@^2.0.0, ripemd160@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-2.0.2.tgz#a1c1a6f624751577ba5d07914cbc92850585890c"
