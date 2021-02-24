@@ -74,7 +74,6 @@ export default function EpisodeShow({ data }) {
             let favClass = ''
             if ( id === favId) {
               favClass = 'fa fa-heart';
-               console.log(favClass, id);
             }
               return (
                 <ul key={id}  className={styles.character_list}>
