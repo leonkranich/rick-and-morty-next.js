@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../../../styles/Home.module.css'
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import localforage from "localforage";
 
 const Endpoint = `https://rickandmortyapi.com/api/character/`;
 
@@ -20,6 +21,18 @@ export async function getServerSideProps({ query }) {
 export default function Character({ data }) {
   const { name, image, gender, location, origin, species, status, episode } = data;
   const [episodes, setEpisodes] = useState([]);
+  const [favorite, setFavorite] = useState('');
+  console.log(favorite);
+
+
+  function handleSubmit() {
+    localforage.setItem('fav', 'fa fa-heart' , function(err, value) {
+      // Do other things once the value has been saved.
+      setFavorite(value);
+      return;
+    });
+    };
+
   useEffect(() => {
     let idArray = [];
     episode.map(ep => {
@@ -48,6 +61,7 @@ export default function Character({ data }) {
       <Head>
         <title>Explore Rick and Morty</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"></link>
       </Head>
 
       <main className={styles.main}>
@@ -56,7 +70,8 @@ export default function Character({ data }) {
             <img src={image} alt={name} />
           </div>
           <div>
-          <h3> { name } </h3>
+          <h3> { name } <div className={styles.heart}><i className={favorite}></i></div> </h3>
+          
             <ul>
               <li>
                 <strong>Status:</strong> { status }
@@ -73,10 +88,9 @@ export default function Character({ data }) {
               <li>
                 <strong>Origin:</strong> { origin.name }
               </li>
-              <li>
-                
-              </li>
+              <button className={styles.button_favorite} onClick={handleSubmit}>Mark as favorite &#10084;&#65039;</button>
             </ul>
+            
            </div>
         </div> 
         <div className={styles.episode_list}>

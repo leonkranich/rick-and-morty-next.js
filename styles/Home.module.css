@@ -170,6 +170,15 @@
   color: #05ffff;
 }
 
+.button_favorite {
+  margin-top: 16px;
+}
+
+.heart {
+  color: red;
+  display: inline-block;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
