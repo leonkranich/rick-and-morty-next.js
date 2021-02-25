@@ -28,7 +28,7 @@ export default function Home({ data }) {
     ...info,
     ongoing: Endpoint
   });
-  const [favId, setFavId] = useState();
+  const [favId, setFavId] = useState(0);
   
   localforage.getItem('fav', function(err, value) {
     // Run this code once the value has been

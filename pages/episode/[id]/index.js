@@ -21,7 +21,7 @@ export async function getServerSideProps({ query }) {
 export default function EpisodeShow({ data }) {
   const { name, air_date, episode, characters } = data;
   const [charactersAll, setCharacters] = useState([]);
-  const [favId, setFavId] = useState();
+  const [favId, setFavId] = useState(0);
 
   localforage.getItem('fav', function(err, value) {
     // Run this code once the value has been

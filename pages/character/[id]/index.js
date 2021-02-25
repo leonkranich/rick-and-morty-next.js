@@ -21,7 +21,7 @@ export async function getServerSideProps({ query }) {
 export default function Character({ data }) {
   const { id, name, image, gender, location, origin, species, status, episode } = data;
   const [episodes, setEpisodes] = useState([]);
-  const [favorite, setFavorite] = useState({});
+  const [favorite, setFavorite] = useState(0);
 
   localforage.getItem('fav', function(err, value) {
     // Run this code once the value has been
