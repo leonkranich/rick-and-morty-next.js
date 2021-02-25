@@ -28,6 +28,9 @@ export default function Character({ data }) {
     // loaded from the offline store.
     setFavorite(value);
     return;
+  }).catch(function(err) {
+    // This code runs if there were any errors
+    console.log(err);
   });
 
   let icon = ''

@@ -28,6 +28,9 @@ export default function EpisodeShow({ data }) {
     // loaded from the offline store.
     setFavId(value);
     return;
+  }).catch(function(err) {
+    // This code runs if there were any errors
+    console.log(err);
   });
   
   
