@@ -42,6 +42,7 @@ export default function Home({ data }) {
   
   // Similar to componentDidMount and componentDidUpdate:
   const { ongoing } = page;
+  // console.log(ongoing);
   useEffect(() => {
     if ( ongoing === Endpoint ) return;
 
@@ -100,7 +101,7 @@ export default function Home({ data }) {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"></link>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
+
       <main className={styles.main}>
         <h1 className={styles.title}>
            Rick & Morty Characters

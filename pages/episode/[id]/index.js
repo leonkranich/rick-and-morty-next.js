@@ -68,6 +68,11 @@ export default function EpisodeShow({ data }) {
             <li>
               <strong>First time aired:</strong> { air_date }
             </li>
+            <Link href="/episode">
+                <a>
+                  <p>Back to all Episodes</p>
+                </a>
+              </Link>
           </ul>
         </div>
         <h2>All Characters </h2>
