@@ -183,6 +183,26 @@
   display: inline-block;
 }
 
+.navbar {
+  width: 100%;
+}
+
+/* .menu {
+  margin: 0;
+  padding: 8px;
+  height: 16px;
+} */
+
+.menu  li {
+  display: inline;
+  text-decoration: none;
+  padding: 8px;
+}
+
+.menu a:hover {
+  color: #05ffff;
+}
+
 
 
 @media (max-width: 600px) {

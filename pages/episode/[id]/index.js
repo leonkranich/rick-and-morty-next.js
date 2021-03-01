@@ -58,6 +58,21 @@ export default function EpisodeShow({ data }) {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"></link>
       </Head>
 
+      <div className={styles.navbar}>
+        <ul className={styles.menu}>
+          <li>
+            <Link href="/">
+              <a>All Characters</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/episode">
+              <a>All Episodes</a>
+            </Link>
+          </li>
+        </ul>
+      </div >
+
       <main className={styles.main}>
       <h1> { name } </h1>
         <div className={styles.character_details}>
@@ -68,7 +83,7 @@ export default function EpisodeShow({ data }) {
             <li>
               <strong>First time aired:</strong> { air_date }
             </li>
-            <Link href="/episode">
+              <Link href="/episode">
                 <a>
                   <p>Back to all Episodes</p>
                 </a>

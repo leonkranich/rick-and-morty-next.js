@@ -89,6 +89,21 @@ export default function Episode({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <div className={styles.navbar}>
+        <ul className={styles.menu}>
+          <li>
+            <Link href="/">
+              <a>All Characters</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/episode">
+              <a>All Episodes</a>
+            </Link>
+          </li>
+        </ul>
+      </div >
+
       <main className={styles.main}>
         <h1 className={styles.title}>
            All Episodes

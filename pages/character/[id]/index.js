@@ -77,6 +77,21 @@ export default function Character({ data }) {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"></link>
       </Head>
 
+      <div className={styles.navbar}>
+        <ul className={styles.menu}>
+          <li>
+            <Link href="/">
+              <a>All Characters</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/episode">
+              <a>All Episodes</a>
+            </Link>
+          </li>
+        </ul>
+      </div >
+
       <main className={styles.main}>
         <div className={styles.character_details}>
           <div className={styles.character_image}>
